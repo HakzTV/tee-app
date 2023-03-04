@@ -1,0 +1,32 @@
+{
+  "name": "tee-app",
+  "version": "1.0.0",
+  "description": "This is my personal website.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HakzTV/tee-app.git"
+  },
+  "author": "Telvin Varfley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HakzTV/tee-app/issues"
+  },
+  "homepage": "https://github.com/HakzTV/tee-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0"
+  }
+}
