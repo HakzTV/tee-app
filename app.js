@@ -3,7 +3,10 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import homeRoutes from "./routes/home.js"
 const app = express()
+
+
 
 
 // Middleware
@@ -11,13 +14,20 @@ dotenv.config()
 mongoose.set('strictQuery', true);  
 // To allow json to be parsed
 app.use(express.json())
+
 // Setting ejs to check in the views section
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(cookieParser()) 
 
-// Configurations
+
+
+// Route handlers
+app.use("/", homeRoutes)
+
+
+// Configurations for DB
 const url = process.env.MONGO_URI
 const options = {
     useNewUrlParser: true,
