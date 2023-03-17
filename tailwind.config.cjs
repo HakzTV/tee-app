@@ -9,7 +9,10 @@ module.exports = {
    darkMode: 'class',
   mode: "jit",
   theme: {
-    extend: {},
+    extend: {
+      
+    },
+
   },
   plugins: [],
 };
