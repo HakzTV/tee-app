@@ -52,40 +52,71 @@ moonIcon.addEventListener("click", ()=>{
 
 themeCheck()
 
-// $(window).scroll(function(){
-//   var sticky = $('nav'),
-//       scroll = $(window).scrollTop();
 
-//   if (scroll >= 100) sticky.addClass('fixed');
-//   else sticky.removeClass('fixed');
-// });
 
-// Getting the images
-const imageWrapper = document.querySelector('.image-wrapper')
-const imageItems = document.querySelectorAll('.image-wrapper > *')
-const imageLength = imageItems.length
-// How many images seen on the page
-const perView = 2.3
-let totalScroll = 0
-const delay = 3000
+document.getElementById("cards").onmousemove = e => {
+  for(const card of document.getElementsByClassName("card")) {
+    const rect = card.getBoundingClientRect(),
+          x = e.clientX - rect.left,
+          y = e.clientY - rect.top;
 
-imageWrapper.style.setProperty('--per-view', perView)
-for(let i = 0; i < perView; i++) {
-  imageWrapper.insertAdjacentHTML('beforeend', imageItems[i].outerHTML)
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
 }
 
-let autoScroll = setInterval(scrolling, delay)
+const slidesContainer = document.querySelector(".slides-container");
+const slideWidth = slidesContainer.querySelector(".slide").clientWidth;
+const prevButton = document.querySelector(".prev");
+const nextButton = document.querySelector(".next");
 
-function scrolling() {
-  totalScroll++
-  if(totalScroll == imageLength + 1) {
-    clearInterval(delay)
-    totalScroll = 1
-    imageWrapper.style.transition = '0s'
-    imageWrapper.style.left = '0'
-    autoScroll = setInterval(scrolling, delay)
-  }
-  const widthEl = document.querySelector('.image-wrapper > :first-child').offsetWidth + 30
-  imageWrapper.style.left = `-${totalScroll * widthEl}px`
-  imageWrapper.style.transition = '.3s'
+nextButton.addEventListener("click", () => {
+	slidesContainer.scrollLeft += slideWidth * 2;
+});
+
+prevButton.addEventListener("click", () => {
+	slidesContainer.scrollLeft -= slideWidth * 2;
+});
+
+
+
+const pre = document.querySelector(".hero-img");
+
+document.addEventListener("mousemove", (e) => {
+  rotateElement(e, pre);
+});
+
+function rotateElement(event, element) {
+  // get mouse position
+  const x = event.clientX;
+  const y = event.clientY;
+  // console.log(x, y)
+
+  // find the middle
+  const middleX = window.innerWidth / 2;
+  const middleY = window.innerHeight / 2;
+  // console.log(middleX, middleY)
+
+  // get offset from middle as a percentage
+  // and tone it down a little
+  const offsetX = ((x - middleX) / middleX) * 45;
+  const offsetY = ((y - middleY) / middleY) * 45;
+  // console.log(offsetX, offsetY);
+
+  // set rotation
+  element.style.setProperty("--rotateX", offsetX + "deg");
+  element.style.setProperty("--rotateY", -1 * offsetY + "deg");
 }
+
+
+// Preloader screen 
+const bounceWrapper = document.querySelector('.loader-body');
+window.addEventListener('load', ()=>{
+  document.querySelector('.loader-body').classList.add("disappear");
+});
+function finishedLoading(){
+  setTimeout(()=>{
+    bounceWrapper.style.display= "none";
+  },7000) ; 
+}
+finishedLoading();

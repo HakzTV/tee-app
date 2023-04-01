@@ -25,6 +25,8 @@ app.use(cookieParser())
 
 // Route handlers
 app.use("/", homeRoutes)
+app.use("/about", homeRoutes)
+
 
 
 // Configurations for DB
